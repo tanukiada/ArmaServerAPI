@@ -13,7 +13,7 @@ Start-PodeServer {
 
     Add-PodeRoute -Method Get -Path '/arma3/start' -ScriptBlock {
         if (Test-ModsExist) {
-            Start-ArmAServer -mods Get-Mods
+            Start-ArmAServer(Get-Mods)
         } else {
             Write-PodeJsonResponse Get-Mods
         }
