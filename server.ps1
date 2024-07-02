@@ -11,8 +11,12 @@ Start-PodeServer {
         Write-PodeJsonResponse -Value @{ 'pid' = Get-PID; 'running' = Test-Running }
     }
 
-    Add-PodeRoute -Method Post -Path '/arma3/start' -ScriptBlock {
-        Start-ArmAServer -mods $WebEvent.Query['mods']
+    Add-PodeRoute -Method Get -Path '/arma3/start' -ScriptBlock {
+        if (Test-ModsExist) {
+            Start-ArmAServer -mods Get-Mods
+        } else {
+            Write-PodeJsonResponse Get-Mods
+        }
     }
 }
 
@@ -36,10 +40,14 @@ function Start-ArmAServer($mods) {
 }
 
 function Get-Mods {
-    if ((Test-Path -Path .\mods.txt)) {
+    if (Test-ModsExist) {
         return Get-Content -Path .\mods.txt
     } else {
-        Write-Error -Message "No mods.txt. Does it exist?" -Category ResourceUnavailable
+        return "No mods.txt.. check server directory."
         Exit
     }
+}
+
+function Test-ModsExist {
+    return (Test-Path -Path .\mods.txt)
 }
