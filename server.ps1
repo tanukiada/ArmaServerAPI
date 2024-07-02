@@ -49,5 +49,5 @@ function Get-Mods {
 }
 
 function Test-ModsExist {
-    return (Test-Path -Path .\mods.txt)
+    return (Test-Path -Path "C:\Arma 3\mods.txt")
 }
