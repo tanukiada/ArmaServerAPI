@@ -36,12 +36,12 @@ function Test-Running {
 }
 
 function Start-ArmAServer($mods) {
-    './C:\Arma 3\arma3server_x64.exe "-name=server" "-config=server.cfg" "-cfg=basic.cfg" "-mod=$mods"'
+    ./C:\Arma3\arma3server_x64.exe "-name=server" "-config=server.cfg" "-cfg=basic.cfg" "-mod=$mods"
 }
 
 function Get-Mods {
     if (Test-ModsExist) {
-        return Get-Content -Path "C:\Arma 3\mods.txt"
+        return Get-Content -Path "C:\Arma3\mods.txt"
     } else {
         return "No mods.txt.. check server directory."
         Exit
@@ -49,5 +49,5 @@ function Get-Mods {
 }
 
 function Test-ModsExist {
-    return (Test-Path -Path "C:\Arma 3\mods.txt")
+    return (Test-Path -Path "C:\Arma3\mods.txt")
 }
