@@ -36,7 +36,8 @@ function Test-Running {
 }
 
 function Start-ArmAServer($mods) {
-    ./C:\Arma3\arma3server_x64.exe "-name=server" "-config=server.cfg" "-cfg=basic.cfg" "-mod=$mods"
+    Set-Location -Path "C:\Arma3"
+    ./arma3server_x64.exe "-name=server" "-config=server.cfg" "-cfg=basic.cfg" "-mod=$mods"
 }
 
 function Get-Mods {
