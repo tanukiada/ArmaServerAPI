@@ -51,8 +51,6 @@ function Start-ArmAServer($mods) {
 function Stop-ArmaServer {
     if (Test-Running -ne 1) {
         Stop-Process(Get-PID)
-    } else {
-        Write-Error -Message "Server Not Running" -Category ResourceUnavailable
     }
 }
 
