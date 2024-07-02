@@ -18,6 +18,14 @@ Start-PodeServer {
             Write-PodeJsonResponse @{ 'message' = Get-Mods }
         }
     }
+
+    Add-PodeRoute -Method Post -Path '/arma3/stop' -ScriptBlock {
+        if (Test-Running -eq "running") {
+            Stop-ArmaServer
+        } else {
+            Write-PodeJsonResponse @{'message' = Test-Running }
+        }
+    }
 }
 
 function Get-PID {
@@ -38,6 +46,14 @@ function Test-Running {
 function Start-ArmAServer($mods) {
     Set-Location -Path "C:\Arma3"
     ./arma3server_x64.exe "-name=server" "-config=server.cfg" "-cfg=basic.cfg" "-mod=$mods"
+}
+
+function Stop-ArmaServer {
+    if (Test-Running -ne 1) {
+        Stop-Process(Get-PID)
+    } else {
+        Write-Error -Message "Server Not Running" -Category ResourceUnavailable
+    }
 }
 
 function Get-Mods {
