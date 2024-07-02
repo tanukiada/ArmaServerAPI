@@ -7,7 +7,7 @@ Start-PodeServer {
         Write-PodeJsonResponse -Value @{ 'value' = 'Hello, world!' }
     }
 
-    Add-PodeRoute -Method Get -Path '/arma3/' -ScriptBlock {
+    Add-PodeRoute -Method Get -Path '/arma3' -ScriptBlock {
         Write-PodeJsonResponse -Value @{ 'pid' = Get-PID; 'running' = Test-Running }
     }
 
