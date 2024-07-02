@@ -34,3 +34,12 @@ function Test-Running {
 function Start-ArmAServer($mods) {
     ./arma3server_x64.exe "-name=server" "-config=server.cfg" "-cfg=basic.cfg" "-mod=$mods"
 }
+
+function Get-Mods {
+    if ((Test-Path -Path .\mods.txt)) {
+        return Get-Content -Path .\mods.txt
+    } else {
+        Write-Error -Message "No mods.txt. Does it exist?" -Category ResourceUnavailable
+        Exit
+    }
+}
