@@ -15,7 +15,7 @@ Start-PodeServer {
         if (Test-ModsExist) {
             Start-ArmAServer -mods Get-Mods
         } else {
-            Write-PodeJsonResponse Get-Mods
+            Write-PodeJsonResponse @{ 'message' = Get-Mods }
         }
     }
 }
@@ -41,7 +41,7 @@ function Start-ArmAServer($mods) {
 
 function Get-Mods {
     if (Test-ModsExist) {
-        return Get-Content -Path .\mods.txt
+        return Get-Content -Path 'C:\Arma 3\mods.txt'
     } else {
         return "No mods.txt.. check server directory."
         Exit
