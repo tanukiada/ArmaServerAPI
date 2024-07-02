@@ -11,9 +11,9 @@ Start-PodeServer {
         Write-PodeJsonResponse -Value @{ 'pid' = Get-PID; 'running' = Test-Running }
     }
 
-    Add-PodeRoute -Method Get -Path '/arma3/start' -ScriptBlock {
+    Add-PodeRoute -Method Post -Path '/arma3/start' -ScriptBlock {
         if (Test-ModsExist) {
-            Start-ArmAServer(Get-Mods)
+            Start-ArmAServer -mods Get-Mods
         } else {
             Write-PodeJsonResponse Get-Mods
         }
